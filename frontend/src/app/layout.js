@@ -1,7 +1,7 @@
 import { Inter, Kodchasan } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 const kodchasan = Kodchasan({ subsets: ["latin"], weight: "400" });
 
 // class handjet = Handjet({sub})
