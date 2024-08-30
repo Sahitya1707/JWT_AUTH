@@ -23,7 +23,7 @@ const Page = () => {
     >
       {" "}
        
-      <div className="bg-white p-8 rounded-lg shadow-md w-[25rem]">
+      <div className="bg-white p-8 rounded-lg shadow-2xl w-[25rem] border-2 border-solid border-black">
         <LoginHeading text="Sign Up" />
         <form className="space-y-4">
           <LoginInput
