@@ -5,8 +5,10 @@ import LoginInput from "../components/LoginInput";
 import LoginButton from "../components/LoginButton";
 import Button from "../components/Button";
 import { backendUrl } from "../utils/constant";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const handleInput = (e) => {
     setLoginData({ ...loginData, [`${e.target.name}`]: e.target.value });
   };
@@ -33,6 +35,9 @@ const Page = () => {
         },
       });
       console.log(response);
+      if (response.ok) {
+        router.push("/dashboard");
+      }
     } catch (err) {
       console.log(err);
     }
