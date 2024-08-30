@@ -15,4 +15,4 @@ app.listen(port, () => {
   console.log(`App running in ${port}`);
 });
 
-app.use("/login", loginRoute);
+app.use("/", loginRoute);

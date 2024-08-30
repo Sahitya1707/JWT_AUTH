@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import LoginHeading from "../components/LoginHeading";
 import LoginInput from "../components/LoginInput";
 import LoginButton from "../components/LoginButton";
+import { backendUrl } from "../utils/constant";
 
 const Page = () => {
   const handleInput = (e) => {
@@ -13,8 +14,22 @@ const Page = () => {
     email: "",
     password: "",
   });
-  const handleSignup = () => {
+  const handleSignup = async (e) => {
+    e.preventDefault();
     console.log("btn clicked");
+    try {
+      const response = await fetch(`${backendUrl}login`, {
+        method: "POST",
+        body: JSON.stringify(signupData),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div
