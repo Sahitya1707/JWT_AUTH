@@ -25,6 +25,7 @@ const Page = () => {
     try {
       const response = await fetch(`${backendUrl}login`, {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify(loginData),
         headers: {
           Accept: "application/json",
