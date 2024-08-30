@@ -5,6 +5,7 @@ import LoginHeading from "../components/LoginHeading";
 import LoginInput from "../components/LoginInput";
 import LoginButton from "../components/LoginButton";
 import { backendUrl } from "../utils/constant";
+import Button from "../components/Button";
 
 const Page = () => {
   const router = useRouter();
@@ -51,7 +52,14 @@ const Page = () => {
           router.push("/login");
         }, 2000);
       }
-      console.log(response);
+
+      if (response.statusText === "Conflict") {
+        setMessage(true);
+        setMessageData({
+          text: "User Already Exist",
+          color: "blue",
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -75,6 +83,9 @@ const Page = () => {
       className="flex   
  items-center justify-center h-screen relative w-full"
     >
+      <div className="absolute top-5 left-5">
+        <Button text="Login" link={"/login"} shadowColor={"yellow"} />
+      </div>
       {message ? (
         <span
           className="absolute right-5 top-5 text-xl font-semibold "

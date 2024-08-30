@@ -5,7 +5,6 @@ const signupController = async (req, res, next) => {
   const salt = await bcrypt.genSaltSync(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  console.log(req.body);
   const newUser = new User({
     email: email,
     password: hashedPassword,
@@ -18,7 +17,7 @@ const signupController = async (req, res, next) => {
     .catch((err) => {
       if (err.errorResponse.code === 11000) {
         console.log("dublicate");
-        return res.status(400).json({ message: "User Already Detected" });
+        return res.status(409).json({ message: "User Already Detected" });
       }
       console.log(err);
     });
