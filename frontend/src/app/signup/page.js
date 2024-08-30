@@ -18,7 +18,7 @@ const Page = () => {
     e.preventDefault();
     console.log("btn clicked");
     try {
-      const response = await fetch(`${backendUrl}login`, {
+      const response = await fetch(`${backendUrl}signup`, {
         method: "POST",
         body: JSON.stringify(signupData),
         headers: {
