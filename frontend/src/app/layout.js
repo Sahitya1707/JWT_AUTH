@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={` ${kodchasan.className}`} style={{}}>
-        <main className="h-[100vh] bg-gradient-to-r from-[#565655] items-center justify-center flex">
+        <main className="h-[100vh] bg-gradient-to-r from-[#565655] items-center justify-center flex relative">
           {children}
         </main>
       </body>
