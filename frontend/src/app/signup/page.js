@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import LoginHeading from "../components/LoginHeading";
 import LoginInput from "../components/LoginInput";
@@ -16,7 +16,12 @@ const Page = () => {
   });
   const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("btn clicked");
+    console.log(signupData.password);
+    if (signupData.email.length === 0 || signupData.password.length === 0) {
+      console.log("Empty");
+      setError(true);
+      return null;
+    }
     try {
       const response = await fetch(`${backendUrl}signup`, {
         method: "POST",
@@ -31,6 +36,14 @@ const Page = () => {
       console.log(err);
     }
   };
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
+  }, [error]);
   return (
     <div
       className="flex   
@@ -38,7 +51,13 @@ const Page = () => {
     >
       {" "}
        
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-[25rem] border-2 border-solid border-black">
+      <div className="bg-white p-8 rounded-lg shadow-2xl w-[25rem] border-2 border-solid border-black relative">
+        {error ? (
+          <span className="absolute right-5 top-5 text-[red]">
+            ❌ Please Fill the Form
+          </span>
+        ) : null}
+
         <LoginHeading text="Sign Up" />
         <form className="space-y-4">
           <LoginInput

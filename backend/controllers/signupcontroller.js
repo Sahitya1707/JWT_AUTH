@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const signupController = (req, res, next) => {
+  console.log(User);
   console.log(req.body);
   const newUser = new User(req.body);
   newUser
