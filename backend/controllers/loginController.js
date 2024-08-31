@@ -7,7 +7,7 @@ const loginController = (req, res, next) => {
   const user = req.body;
   const { email, password } = req.body;
 
-  console.log(email);
+  console.log({ email });
   UserModal.findOne({ email }).then((data) => {
     if (data) {
       const storedPassword = data.password;
@@ -17,8 +17,8 @@ const loginController = (req, res, next) => {
         }
         console.log(result);
         if (result) {
-          const accessToken = createAccessToken(user);
-          const refreshToken = createRefreshToken(user);
+          const accessToken = createAccessToken({ email });
+          const refreshToken = createRefreshToken({ email });
           // sending the refresh token
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,

@@ -12,6 +12,7 @@ const ProtectedRoutes = (WrapperComponent) => {
             method: "GET",
             credentials: "include",
           });
+          console.log(authResponse);
         } catch (err) {}
       };
       checkAuth();
