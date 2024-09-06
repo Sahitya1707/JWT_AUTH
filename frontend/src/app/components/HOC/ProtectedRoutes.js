@@ -1,8 +1,10 @@
 import { backendUrl } from "@/app/utils/constant";
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const ProtectedRoutes = (WrapperComponent) => {
   return (props) => {
+    const router = useRouter();
     useEffect(() => {
       console.log("higher order component called");
 
@@ -12,8 +14,13 @@ const ProtectedRoutes = (WrapperComponent) => {
             method: "GET",
             credentials: "include",
           });
+          if (!authResponse.ok) {
+            router.push("/login");
+          }
           console.log(authResponse);
-        } catch (err) {}
+        } catch (err) {
+          router.push("/login");
+        }
       };
       checkAuth();
     });
