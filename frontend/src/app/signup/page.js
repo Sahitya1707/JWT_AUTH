@@ -23,11 +23,7 @@ const Page = () => {
     e.preventDefault();
     // handling the email and password when the length of both of them is 0
     if (signupData.email.length === 0 || signupData.password.length === 0) {
-      setMessage(true);
-      setMessageData({
-        text: "Error, Fill the Form !",
-        color: "red",
-      });
+      alert("Please fill the form");
       return null;
     }
     try {
@@ -41,12 +37,6 @@ const Page = () => {
       });
 
       if (response.ok) {
-        // this is just for showing message, I would use redux in my other application just a ui for this application using local state. (it is not recommended to show message like this as you need to make different state in different component or use prop drilling, I use redux in most of the case.)
-        setMessage(true);
-        setMessageData({
-          text: "SuccessFull Signup",
-          color: "green",
-        });
         // just to show that login is done message
         setInterval(() => {
           router.push("/login");
@@ -54,30 +44,13 @@ const Page = () => {
       }
 
       if (response.statusText === "Conflict") {
-        setMessage(true);
-        setMessageData({
-          text: "User Already Exist",
-          color: "blue",
-        });
+        alert("user already exist");
       }
     } catch (err) {
       console.log(err);
     }
   };
-  // simple state to show the message
-  const [message, setMessage] = useState(false);
-  const [messageData, setMessageData] = useState({
-    text: "",
-    color: "",
-  });
-  useEffect(() => {
-    // message message if only visible to few second if it is true
-    if (message) {
-      setTimeout(() => {
-        setMessage(false);
-      }, 3000);
-    }
-  }, [message]);
+
   return (
     <div
       className="flex   
@@ -86,16 +59,6 @@ const Page = () => {
       <div className="absolute top-5 left-5">
         <Button text="Login" link={"/login"} shadowColor={"yellow"} />
       </div>
-      {message ? (
-        <span
-          className="absolute right-5 top-5 text-xl font-semibold "
-          style={{
-            color: messageData.color,
-          }}
-        >
-          {messageData.text}
-        </span>
-      ) : null}
        
       <div className="bg-white p-8 rounded-lg shadow-2xl w-[25rem] border-2 border-solid border-black relative">
         <LoginHeading text="Sign Up" />
