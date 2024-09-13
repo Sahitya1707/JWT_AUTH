@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const ProtectedRoutes = (WrapperComponent) => {
-  return (props) => {
+  const newComponent = (props) => {
     const router = useRouter();
     useEffect(() => {
       console.log("higher order component called");
@@ -23,13 +23,14 @@ const ProtectedRoutes = (WrapperComponent) => {
         }
       };
       checkAuth();
-    });
+    }, [router]);
     return (
       <div>
         <WrapperComponent {...props} />
       </div>
     );
   };
+  return newComponent;
 };
 
 export default ProtectedRoutes;
